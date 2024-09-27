@@ -4,6 +4,10 @@ import os
 from datetime import datetime
 import sys
 import warnings
+import time
+
+# Start time before entering the loop
+start_time = time.time()
 
 # Disable MSMF backend
 os.environ["OPENCV_VIDEOIO_MSMF_ENABLE"] = "0"
@@ -83,5 +87,14 @@ if __name__ == "__main__":
     unknown_image_dir = sys.argv[2]
 
     known_face_encodings, known_face_names = load_known_faces(known_image_dir)
-    result = capture_face(known_face_encodings, known_face_names, unknown_image_dir)
-    print(result)
+
+    while True:
+        result = capture_face(known_face_encodings, known_face_names, unknown_image_dir)
+        print(result)
+        
+        # Check how much time has passed
+        elapsed_time = time.time() - start_time
+        
+        # Break the loop if 3 seconds have passed
+        if elapsed_time >= 3:
+            break
