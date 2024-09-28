@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Convai.Scripts.Utils;
+using System.Threading;
 
 public class YesRecognitionScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    private string userName;
+    public string userName;
     void Start()
     {
         
@@ -24,9 +25,14 @@ public class YesRecognitionScript : MonoBehaviour
         userName = name;
     }
 
+    public void userSaysRecognizeMe()
+    {
+        ConvaiNPCManager.Instance.activeConvaiNPC.SendTextDataAsync($"<speak>{userName}</speak>");
+    }
+
     public void saveUsersPhoto()
     {
-        ConvaiNPCManager.Instance.activeConvaiNPC.SendTextDataAsync("<speak>, that is a nice name. I will be sure to remember it for the future. </speak>");
+    
         // Find the pythonGO game object and get the script path and filename
         PythonIntegration pythonIntegration = GameObject.Find("pythonGO").GetComponent<PythonIntegration>();
         string scriptPath = pythonIntegration.getScriptPath();
@@ -37,22 +43,43 @@ public class YesRecognitionScript : MonoBehaviour
 
         // Combines the path with "picture" folder and fileName to get the path to the picture
         string picturesPath = Path.Combine(directoryPath, "picture", fileName);
+        Debug.Log(picturesPath);
 
         // If the file exists:
         if (File.Exists(picturesPath))
         {
             // Get the new filename using the player's name (with an extension, assuming the original file's extension)
             string newFileName = userName + Path.GetExtension(fileName);
-            
+            Debug.Log(newFileName);
+            Debug.Log(userName);
+
             // Create the path to move the file into the "test" folder with the new name
             string testFolderPath = Path.Combine(directoryPath, "test", newFileName);
+            Debug.Log(testFolderPath);
 
             // Move the file to the "test" folder and rename it
             File.Move(picturesPath, testFolderPath);
+            ConvaiNPCManager.Instance.activeConvaiNPC.SendTextDataAsync("<speak>What a nice name!</speak>");
+
+             /* Get all files in the directory
+                string[] files = Directory.GetFiles(picturesPath);
+
+                // Check if there are any files in the directory
+                if (files.Length > 0){
+                    // Loop through and delete each file
+                    foreach (string file in files)
+                    {
+                        File.Delete(file);
+                    }
+                } */
+
+
         }
         else
         {
             Debug.LogError("Tried to move a file that doesn't exist.");
         }
+
+
     }
 }
