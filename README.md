@@ -53,7 +53,7 @@ The project is structured into four phases:
 
 1. **Clone the Repository**:  
    ```bash
-   git clone https://github.com/YahyaAmin/virtual-assistant.git
+   git clone https://github.com/YahyaAmin/Convai_face_recognition.git
    ```
 
 2. **Navigate to the Project Directory**:  
@@ -76,7 +76,7 @@ The project is structured into four phases:
 
 1. **Clone the Repository**:  
    ```bash
-   git clone https://github.com/YahyaAmin/virtual-assistant.git
+   git clone https://github.com/YahyaAmin/Convai_face_recognition.git
    ```
 
 2. **Navigate to the Project Directory**:  
@@ -173,7 +173,7 @@ This section explains how to integrate the Python face recognition script with U
 2. **Unity**: Any version that supports C# scripting.
 3. **OpenCV and face_recognition for Python**: Already covered in the installation steps of the Python script.
 
-### Steps to Set Up Unity Integration
+### Steps to Set Up Unity Integration (not applicable for the exe file. Skip these for .exe file
 
 1. **Add the C# Script to Your Unity Project**:
    - Place the C# script (`PythonIntegration.cs`) into your Unity project's `Assets/Scripts` folder.
