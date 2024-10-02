@@ -96,5 +96,5 @@ if __name__ == "__main__":
         elapsed_time = time.time() - start_time
         
         # Break the loop if 3 seconds have passed
-        if elapsed_time >= 3:
+        if elapsed_time >= 5:
             break
